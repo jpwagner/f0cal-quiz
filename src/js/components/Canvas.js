@@ -50,9 +50,12 @@ class SVGContainer extends React.Component {
 				<button onClick={() => { this.createNode() }}>
 					Add Node
 				</button>
-				<svg>
+				<svg width={500} height={300}>
+
 					{this.content()}
+
 				</svg>
+
 		    </div>
 		);
 	}
