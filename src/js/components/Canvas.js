@@ -1,4 +1,17 @@
 import React from 'react';
+import Node from './node';
+
+function generateUUID () { // Public Domain/MIT
+    var d = new Date().getTime();
+    if (typeof performance !== 'undefined' && typeof performance.now === 'function'){
+        d += performance.now(); //use high-precision timer if available
+    }
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = (d + Math.random() * 16) % 16 | 0;
+        d = Math.floor(d / 16);
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+}
 
 class SVGContainer extends React.Component {
 	constructor(props) {
@@ -9,9 +22,10 @@ class SVGContainer extends React.Component {
 		};
 	}
 
-	addNode(x, y) {
+	createNode(node){
+		var uuid = generateUUID();
 		var currentNodes = this.state.nodes;
-		currentNodes.push([x,y])
+		currentNodes.push(uuid)
 
 		this.setState({
 			nodes: currentNodes
@@ -19,7 +33,7 @@ class SVGContainer extends React.Component {
 	}
 
 	renderNode(node) {
-		return (<circle cx={node[0]} cy={node[1]} r={10} fill="red" />);
+		return (<Node uuid={node} />);
 	}
 
 	content() {
@@ -33,8 +47,7 @@ class SVGContainer extends React.Component {
 	render() {
 		return (
 			<div>
-				<button onClick={() => { 
-					this.addNode(Math.ceil(Math.random()*100),Math.ceil(Math.random()*100)) }}>
+				<button onClick={() => { this.createNode() }}>
 					Add Node
 				</button>
 				<svg>
