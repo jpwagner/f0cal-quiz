@@ -6,8 +6,8 @@ class Node extends React.Component {
   
     this.state = {
       uuid: props.uuid,
-      x: Math.ceil(Math.random()*100),
-      y: Math.ceil(Math.random()*100)
+      x: Math.ceil(Math.random()*480)+10,
+      y: Math.ceil(Math.random()*280)+10
     };
   }
 
@@ -38,15 +38,22 @@ class Node extends React.Component {
   };
 
   render() {
-    const { x, y } = this.state;
     return (
-      <circle
-        r="10"
-        cx={x}
-        cy={y}
-        onMouseDown={this.handleMouseDown}
-        onMouseUp={this.handleMouseUp}
-      />
+      <g transform={"translate(" + this.state.x + "," + this.state.y + ")"}>
+        <circle
+          r="15"
+          fill="grey"
+          stroke="black"
+          strokeWidth="1"
+          onMouseDown={this.handleMouseDown}
+          onMouseUp={this.handleMouseUp}
+        />
+        <text 
+          dx="-20"
+          fontSize="12">
+            {this.state.uuid.substring(0,5)}
+        </text>
+      </g>
     )
   }
 }

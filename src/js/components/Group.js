@@ -44,7 +44,9 @@ class Group extends React.Component {
         r="20"
         cx={x}
         cy={y}
-        style="fill: red;"
+        fill="red"
+        stroke="black"
+        strokeWidth="2"
         onMouseDown={this.handleMouseDown}
         onMouseUp={this.handleMouseUp}
       />
