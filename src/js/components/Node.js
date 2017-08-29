@@ -41,7 +41,7 @@ class Node extends React.Component {
     const { x, y } = this.state;
     return (
       <circle
-        r="20"
+        r="10"
         cx={x}
         cy={y}
         onMouseDown={this.handleMouseDown}
