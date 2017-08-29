@@ -32,17 +32,26 @@ class SVGContainer extends React.Component {
 		})
 	}
 
-	renderNode(node) {
-		return (<Node uuid={node} />);
-	}
-
-	content() {
+	renderNodes() {
 		return this.state.nodes.map((node, i) => {
 	    	return (
-	    		this.renderNode(node)
-	    	)
+	    		<Node uuid={node} />
+	    	);
 		})
 	}
+
+	handleMouseDown = (e) => {
+		this.coords = {
+		  x: e.pageX,
+		  y: e.pageY
+		}
+		console.log(this.coords);
+	};
+
+	handleMouseUp = () => {
+		this.coords = {};
+	};
+
 
 	render() {
 		return (
@@ -50,9 +59,11 @@ class SVGContainer extends React.Component {
 				<button onClick={() => { this.createNode() }}>
 					Add Node
 				</button>
-				<svg width={500} height={300}>
+				<svg width={500} height={300}
+				        onMouseDown={this.handleMouseDown}
+				        onMouseUp={this.handleMouseUp}>
 
-					{this.content()}
+					{this.renderNodes()}
 
 				</svg>
 
