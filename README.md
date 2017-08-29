@@ -1,0 +1,4 @@
+  - `npm install` to install javascript dependencies
+  - `npm run webpack` to build react dist and css
+  - `npm start`
+  - localhost:5000
